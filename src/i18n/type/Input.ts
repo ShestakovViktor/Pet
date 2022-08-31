@@ -1,0 +1,1 @@
+export type Input = {[key: string]: string | number | Date}

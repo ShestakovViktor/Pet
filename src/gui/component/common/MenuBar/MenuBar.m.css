@@ -1,0 +1,36 @@
+.menubar {
+	& > .dropdown {
+		display: inline-block;
+		position: relative;
+
+
+		& > .title {
+			padding: .25em .5em;
+			cursor: pointer;
+		}
+
+		&.open {
+			& > .list {
+				display: block;
+			}
+		}
+
+		& > .list {
+			display: none;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			cursor: pointer;
+
+			& > .option {
+				padding: .25em .5em;
+
+				&:hover {
+					color: var(--backgroundBase);
+					background: var(--contentBase);
+		
+				}
+			}
+		}
+	}
+}

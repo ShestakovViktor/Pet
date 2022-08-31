@@ -1,0 +1,38 @@
+.select {
+	display: inline-block;
+	position: relative;
+
+	box-sizing: border-box;
+
+	border: 1px solid var(--contentBase);
+	border-radius: .25em;
+	padding: .25em .5em;
+
+	& > .input {
+		display: inline-block;
+		width: 7em;
+		cursor: pointer;
+	}
+
+	& > .button {
+		display: inline;
+	}
+
+	& > .list {
+		position: absolute;
+		width: 100%;
+		top: 100%;
+		left: 0;
+		cursor: pointer;
+		box-sizing: border-box;
+
+		& > .option {
+			padding: .25em .5em;
+		}
+
+		& > .option:hover {
+			color: var(--backgroundBase);
+			background: var(--contentBase);
+		}
+	}
+}

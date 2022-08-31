@@ -1,0 +1,9 @@
+.status-bar {
+	display: inline-block;
+	padding: .25em;
+
+	& > * {
+		display: inline-block;
+
+	}
+}

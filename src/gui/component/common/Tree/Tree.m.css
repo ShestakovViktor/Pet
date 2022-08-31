@@ -1,0 +1,51 @@
+.node {
+	position: relative;
+
+	&.root {
+		position: relative;
+	}
+
+	&.branch, &.leaf {
+		padding-left: .5em;
+
+		&::before {
+			position: absolute;
+			display: block;
+			content: '';
+			height: .5em;
+			width: .5em;
+			left: 0;
+			border-bottom: 1px dashed var(--contentBase);
+		}
+
+		&:not(:last-child) {
+			border-left: 1px dashed var(--contentBase);
+			margin-left: -1px;
+		}
+
+		&:last-child {
+			&::before {
+				margin-left: -1px;
+				border-left: 1px dashed var(--contentBase);
+			}
+		}
+	}
+
+	.span {
+		display: inline;
+		margin-right: .25em;
+		margin-left: .25em;
+	}
+
+	.title {
+		display: inline;
+		cursor: pointer;
+		padding-bottom: .5em;
+		pointer-events: all;
+	}
+
+	.content {
+		margin-left: .75em;
+		pointer-events: none;
+	}
+}

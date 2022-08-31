@@ -1,0 +1,9 @@
+.main-settings {
+	width: 80%;
+	height: 80%;
+	border-radius: .5em;
+	overflow: hidden;
+
+	box-shadow: 5px 5px 8px 0px var(--shadowBase);
+
+}

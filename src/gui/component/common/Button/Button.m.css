@@ -1,0 +1,16 @@
+.button {
+	cursor: pointer;
+	padding: .25em;
+	position: relative;
+
+	border: 1px solid var(--contentBase);
+	border-radius: .35em;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+
+	width: 32px;
+	height: 32px;
+}
