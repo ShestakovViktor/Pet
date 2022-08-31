@@ -1,0 +1,56 @@
+{
+	"compilerOptions": {
+		"target": "es2017",
+		"module": "CommonJs",
+		"outDir": "./build",
+		"rootDir": "./src",
+		"strict": true,
+		"jsx": "react",
+		"strictNullChecks": true,
+		"sourceMap": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"lib": [
+            "es6",
+            "dom",
+			"es2020.string"
+        ],
+		"downlevelIteration": true,
+		"moduleResolution": "node",
+		"noEmitOnError": true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+
+		"baseUrl": "./src",
+
+		"paths": {
+			"@core": ["core"], 
+			"@core/*": ["core/*"],
+
+			"@engine": ["engine"], 
+			"@engine/*": ["engine/*"],
+
+			"@gui": ["gui"], 
+			"@gui/*": ["gui/*"],
+
+			"@i18n": ["i18n"], 
+			"@i18n/*": ["i18n/*"],
+
+			"@storage": ["storage"], 
+			"@storage/*": ["storage/*"],
+
+			"@style": ["style"], 
+			"@style/*": ["style/*"],
+		}
+	},
+	"include": [
+		"**/*.ts",
+		"**/*.tsx",
+		"**/*.d.ts"
+	],
+	"exclude": ["**/*.js"],
+	"watchOptions": {
+		"watchDirectory": "useFsEvents"
+	},
+}
