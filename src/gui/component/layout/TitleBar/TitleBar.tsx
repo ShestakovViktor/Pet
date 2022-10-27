@@ -1,10 +1,10 @@
-import React, {useContext} from 'react';
+import React/*, {useContext}*/ from 'react';
 import styles from './TitleBar.m.css';
 import {MenuBar} from '@gui/component/common';
-import {Context} from '@gui';
+//import {Context} from '@gui';
 
 export function TitleBar(): React.ReactElement {
-	const {i18n} = useContext(Context);
+	//const {i18n} = useContext(Context);
 
 	const data: {
 		title: string;
@@ -13,6 +13,7 @@ export function TitleBar(): React.ReactElement {
 			onclick?: () => void;
 		}[];
 	}[] = [
+		/*
 		{
 			title: i18n.t('menu', {ns: 'TitleBar'}),
 			children: [
@@ -34,6 +35,7 @@ export function TitleBar(): React.ReactElement {
 				{name: 'What the fuck'},
 			],
 		},
+		*/
 
 	];
 

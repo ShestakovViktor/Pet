@@ -28,20 +28,17 @@
 			"@core": ["core"], 
 			"@core/*": ["core/*"],
 
-			"@engine": ["engine"], 
-			"@engine/*": ["engine/*"],
+			"@module": ["core/module"], 
+			"@module/*": ["core/module/*"],
+
+			"@driver": ["core/driver"], 
+			"@driver/*": ["core/driver/*"],
+
+			"@math": ["core/math"], 
+			"@math/*": ["core/math/*"],
 
 			"@gui": ["gui"], 
 			"@gui/*": ["gui/*"],
-
-			"@i18n": ["i18n"], 
-			"@i18n/*": ["i18n/*"],
-
-			"@storage": ["storage"], 
-			"@storage/*": ["storage/*"],
-
-			"@style": ["style"], 
-			"@style/*": ["style/*"],
 		}
 	},
 	"include": [

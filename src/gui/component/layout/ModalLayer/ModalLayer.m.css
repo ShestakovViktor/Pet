@@ -12,7 +12,6 @@
 
 	cursor: pointer;
 
-	pointer-events: all;
 	&:empty {
 		background: none;
 		pointer-events: none;

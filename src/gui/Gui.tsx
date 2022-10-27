@@ -1,48 +1,58 @@
-import React, {useState} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {Editor} from '@gui/component/layout';
-import {Payload} from '@gui/type';
-import {Context} from '@gui';
 
-function App(props: {payload: Payload}): React.ReactElement {
-	const [modal, setModal] = useState<React.ReactElement>();
-	const [message, setMessage] = useState<string>();
-
-	return (
-		<Context.Provider value={{
-			...props.payload,
-			modal,
-			setModal,
-			message,
-			setMessage,
-		}}>
-			<Editor/>
-		</Context.Provider>
-	);
-
-}
+import {App} from '@gui/component/root';
+import {HSLA, Theme} from '@core/type';
+import {Core} from '@core';
 
 export class Gui {
-	constructor(payload: Payload) {
-		this.initRoutes(payload);
-		this.initThemes(payload);
+	constructor(viewport: HTMLCanvasElement, core: Core) {
+		const rootElement =	document.getElementById('root');
+		if (!rootElement) throw new Error();
+
+		const root = ReactDOM.createRoot(rootElement);
+
+		root.render(<App viewport={viewport} core={core}/>);
+
+		this.initThemes(core);
 	}
 
-	initRoutes(payload: Payload): void {
-		const root = ReactDOM.createRoot(document.body);
-		root.render(<App payload={payload}/>);
-	}
-
-	initThemes({style}: Payload): void {
+	initThemes(core: Core): void {
+		const style = core.getStyle();
 		const themes = style.getThemes();
 
 		for (const {key} of themes) {
 			const theme = style.getTheme(key);
-			const res = style.toCssFormat(theme);
+			const res = this.toCssFormat(theme);
 
 			const element = document.createElement('style');
 			element.innerHTML = res;
 			document.head.appendChild(element);
 		}
+	}
+
+	private toCssFormat(theme: Theme): string {
+		const cssName = this.toCssAttrFormat(theme.key);
+		const cssProps = this.toCssVarsFormat(theme.scheme);
+
+		return `[${cssName}] {${cssProps}};`;
+	}
+
+	private toCssAttrFormat(name: string): string {
+		return `data-theme="${name}"`;
+	}
+
+	private toCssVarsFormat(colors: {[key: string]: HSLA}): string {
+		let result = '';
+
+		for (const [name, value] of Object.entries(colors)) {
+			result += `--${name}: ${this.fooVal(value)};\n`;
+		}
+
+		return result;
+	}
+
+	private fooVal(value: HSLA): string {
+		return `hsla(${value.h}deg, ${value.s}%, ${value.l}%, ${value.a})`;
 	}
 }

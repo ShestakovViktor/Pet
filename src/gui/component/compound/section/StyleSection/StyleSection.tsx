@@ -1,3 +1,4 @@
+/*
 import React, {useContext} from 'react';
 import {Section, Select} from '@gui/component/common';
 import {Context} from '@gui';
@@ -30,3 +31,4 @@ export function StyleSection(): React.ReactElement {
 		</Section>
 	);
 }
+*/

@@ -13,7 +13,6 @@ export function SettingsMenu (): React.ReactElement {
 				icon='settings'
 				onClick={
 					(): void => {
-						console.log('qwe');
 						context.setModal(<MainSettings/>);
 					}
 				}

@@ -1,3 +1,4 @@
+/*
 import React, {useContext} from 'react';
 import {Section} from '@gui/component/common';
 import {Context} from '@gui';
@@ -12,3 +13,5 @@ export function GeneralSection(): React.ReactElement {
 		</Section>
 	);
 }
+
+*/

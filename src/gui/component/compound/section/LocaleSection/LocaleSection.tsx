@@ -1,3 +1,4 @@
+/*
 import React, {useContext} from 'react';
 import {Section, Select} from '@gui/component/common';
 import {Context} from '@gui';
@@ -23,3 +24,5 @@ export function LocaleSection(): React.ReactElement {
 		</Section>
 	);
 }
+
+*/

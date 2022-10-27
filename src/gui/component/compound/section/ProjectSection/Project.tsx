@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import {Button, Dialog} from '@gui/component/common';
 
@@ -7,7 +8,6 @@ export function ProjectDialog(): React.ReactElement {
 		input.type = 'file';
 		input.click();
 		input.addEventListener('change', () => {
-			/*
 			const file = input.files[0];
 
 			const reader = new FileReader();
@@ -15,7 +15,6 @@ export function ProjectDialog(): React.ReactElement {
 				vnode.attrs.core.project.load(reader.result);
 			});
 			reader.readAsText(file);
-			*/
 		});
 
 	}
@@ -28,6 +27,7 @@ export function ProjectDialog(): React.ReactElement {
 	);
 }
 
+		*/
 /*
 		m(Button, {
 			icon: 'folder',

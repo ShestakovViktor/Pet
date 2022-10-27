@@ -6,20 +6,16 @@
 		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
 		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
 		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
-		<script>
-			setTimeout(() => document.querySelector('html > span').remove(), 200);
-		</script>
 		<style>
-			html {
+			html, body, #root {
 				height: 100%;
-			}
-			body, #root {
-				height: 100%;
+				width: 100%;
 				margin: 0;
 				padding: 0;
 			}
 		</style>
 	</head>
 	<body>
+		<div id="root"></div>
 	</body>
 </html>

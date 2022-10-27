@@ -1,110 +1,88 @@
-import {Camera, Engine, FpsMonitor} from '@engine';
-import {View, View3D} from '@core/view';
-import {Mode} from '@core/mode';
-import {Scaffold} from './module';
+import * as locales from '@core/locale';
+import * as themes from '@core/theme';
+
+import {DbDriver, IoDriver, GlDriver} from '@core/interface';
+
+import {WebDbDriver, WebGlDriver, WebIoDriver} from '@driver';
+
+import {
+	View,
+	Scene,
+	Visualizer,
+	Mode,
+	Invoker,
+	Style,
+	I18n,
+	Engine,
+} from '@module';
 
 export class Core {
-	private scaffold: Scaffold;
+	private db: DbDriver;
+	private gl: GlDriver;
+	private io: IoDriver;
+
+	private style: Style;
+
+	private engine: Engine;
 	private view: View;
-	private mode!: Mode;
+	private scene: Scene;
+	private visualizer: Visualizer;
+	private mode: Mode;
+	private invoker: Invoker;
 
-	constructor(private engine: Engine) {
-		this.scaffold = new Scaffold(this.engine);
-		this.view = new View3D(this.engine);
+	constructor(private viewport: HTMLCanvasElement) {
+		this.gl = new WebGlDriver(this.viewport);
+		this.io = new WebIoDriver(this.viewport);
+		this.db = new WebDbDriver();
 
-		this.initMouseListener();
+		const i18n = new I18n(locales, {language: this.db.load('locale')});
+		this.style = new Style(themes, {theme: this.db.load('theme')});
+
+		console.log(i18n);
+
+		this.engine = new Engine(this.gl);
+
+		this.view = new View();
+		this.scene = new Scene(this.engine);
+		this.visualizer = new Visualizer(this.engine, this.view, this.scene);
+		this.invoker = new Invoker();
+		this.mode = new Mode(this.invoker);
+
+		this.initMouse();
+
 		this.loop();
 	}
 
-	getMode(): string {
-		return 'Test';
+	getStyle(): Style {
+		return this.style;
 	}
 
-	getViewport(): HTMLCanvasElement {
-		return this.engine.getViewport();
-	}
-
-	updateViewport(): void {
-		this.engine.updateViewportSize();
-	}
-
-	getCamera(): Camera {
-		return this.engine.camera;
-	}
-
-	getFps(): ReturnType<FpsMonitor['getFps']> {
-		return this.engine.fpsMonitor.getFps();
-	}
-
-	changeProjection(): void {
-		this.engine.camera.setProjectionMode(
-			this.engine.camera.getProjectionMode() == 'perspective'
-				? 'orthogonal'
-				: 'perspective'
-		);
-	}
-
-	initMouseListener(): void {
-		this.engine.getViewport().addEventListener('mousemove', event => {
+	private initMouse(): void {
+		this.io.onMouseMove(event => {
 			this.view.onMouseMove(event);
-			//this.mode.onMouseMove(event);
+			this.mode.onMouseMove(event);
 		});
 
-		this.engine.getViewport().addEventListener('wheel', event => {
+		this.io.onWheelRoll(event => {
 			this.view.onWheelRoll(event);
-			//this.mode.onWheelRoll(event);
-		}, {capture: true, passive: true});
+			this.mode.onWheelRoll(event);
+		});
 	}
 
-
-	loop(): void {
+	private loop(): void {
 		this.engine.clear();
-		//this.engine.draw(this.scaffold.origin.model);
-
-		let m;
-
-		m = this.scaffold.xAxis.getFoo();
-		this.engine.monocolorRender(
-			m.model,
-			m.transform,
-			m.color
-		);
-
-		m = this.scaffold.yAxis.getFoo();
-		this.engine.monocolorRender(
-			m.model,
-			m.transform,
-			m.color
-		);
-
-		m = this.scaffold.zAxis.getFoo();
-		this.engine.monocolorRender(
-			m.model,
-			m.transform,
-			m.color
-		);
-
-		m = this.scaffold.xyPlane.getFoo();
-		this.engine.monocolorRender(
-			m.model,
-			m.transform,
-			m.color
-		);
-
-		m = this.scaffold.yzPlane.getFoo();
-		this.engine.monocolorRender(
-			m.model,
-			m.transform,
-			m.color
-		);
-
-		m = this.scaffold.xzPlane.getFoo();
-		this.engine.monocolorRender(
-			m.model,
-			m.transform,
-			m.color
-		);
-
+		this.visualizer.draw();
 		window.requestAnimationFrame(() => this.loop());
+	}
+
+	updateViewportSize(): void {
+		const width = this.viewport.clientWidth;
+		const height = this.viewport.clientHeight;
+
+		this.viewport.width = width;
+		this.viewport.height = height;
+
+		this.engine.updateViewportSize();
+		this.view.setAscpetRatio(width / height);
 	}
 }

@@ -45,11 +45,10 @@ module.exports = {
 		extensions: ['.tsx', '.ts', '.js'],
 		alias: {
 			'@core': path.resolve(__dirname, 'src/core/'),
-			'@engine': path.resolve(__dirname, 'src/engine/'),
+			'@module': path.resolve(__dirname, 'src/core/module/'),
+			'@driver': path.resolve(__dirname, 'src/core/driver/'),
+			'@math': path.resolve(__dirname, 'src/core/math/'),
 			'@gui': path.resolve(__dirname, 'src/gui/'),
-			'@i18n': path.resolve(__dirname, 'src/i18n/'),
-			'@storage': path.resolve(__dirname, 'src/storage/'),
-			'@style': path.resolve(__dirname, 'src/style/'),
 		},
 	}
 };
